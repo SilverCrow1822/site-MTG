@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Planar Cache — Magic: the Gathering{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="stars2"></div>
+<div class="stars3"></div>
+<div class="nebula-blob blob-a"></div>
+<div class="nebula-blob blob-b"></div>
+<div class="nebula-blob blob-c"></div>
+
+<header class="site-header">
+    <a href="{{ url_for('index') }}" class="brand">
+        <img src="{{ url_for('static', filename='img/mtg-logo.png') }}" alt="Magic: the Gathering" class="mtg-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='none';">
+        <span class="brand-divider"></span>
+        <span class="brand-mark">✦</span>
+        <span class="brand-text">Planar<em>Cache</em></span>
+    </a>
+    <nav class="site-nav">
+        <a href="{{ url_for('index') }}#boxes">Booster Boxes</a>
+        <a href="{{ url_for('index') }}#cards">Cartas</a>
+    </nav>
+</header>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+    <p>Planar Cache — projeto autoral inspirado em Magic: the Gathering.</p>
+    <p class="fine-print">Imagens de cartas via API pública da Scryfall. Magic: the Gathering é marca registrada da Wizards of the Coast. Site não oficial, sem fins comerciais.</p>
+</footer>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
