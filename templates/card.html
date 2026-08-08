@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}{{ card.name }} — Planar Cache{% endblock %}
+{% block content %}
+
+<section class="card-detail">
+    <a href="{{ url_for('index') }}#cards" class="back-link">&larr; Voltar para as cartas</a>
+
+    <div class="card-detail-grid">
+        <div class="card-detail-art">
+            {% if card.image %}
+            <img src="{{ card.image }}" alt="{{ card.name }}">
+            {% else %}
+            <div class="img-placeholder img-placeholder-lg"><span>{{ card.name }}</span></div>
+            {% endif %}
+        </div>
+
+        <div class="card-detail-info">
+            <div class="card-detail-top">
+                <h1>{{ card.name }}</h1>
+                <span class="mana-cost">{{ card.mana_cost }}</span>
+            </div>
+
+            <p class="card-type">{{ card.type_line }}</p>
+
+            <div class="rarity-tag rarity-{{ card.rarity|lower|replace('í','i')|replace('á','a') }}">{{ card.rarity }}</div>
+
+            <div class="oracle-box">
+                <h2>Texto do Oráculo</h2>
+                <p>{{ card.oracle_text }}</p>
+            </div>
+
+            {% if card.flavor_text %}
+            <div class="flavor-box">
+                <p>&ldquo;{{ card.flavor_text }}&rdquo;</p>
+            </div>
+            {% endif %}
+
+            <dl class="card-facts">
+                <div>
+                    <dt>Coleção</dt>
+                    <dd>{{ card.set }}</dd>
+                </div>
+                <div>
+                    <dt>Lançamento</dt>
+                    <dd>{{ card.release_date }}</dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

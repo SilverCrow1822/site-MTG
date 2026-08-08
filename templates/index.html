@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="hero">
+    <div class="hero-inner">
+        <p class="eyebrow">Catálogo não oficial de Magic: the Gathering</p>
+        <h1 class="hero-title">Explore o <span>multiverso</span><br>em cada carta.</h1>
+        <p class="hero-sub">As principais coleções, lançamentos e cartas que moldaram o jogo — reunidas em um só lugar, num visual inspirado no vazio entre os planos.</p>
+        <div class="hero-actions">
+            <a href="#boxes" class="btn btn-primary">Ver booster boxes</a>
+            <a href="#cards" class="btn btn-ghost">Ver cartas avulsas</a>
+        </div>
+    </div>
+</section>
+
+<section id="boxes" class="section">
+    <div class="section-head">
+        <h2>Booster Boxes</h2>
+        <p>As coleções mais recentes, prontas para abertura.</p>
+    </div>
+
+    <div class="box-grid">
+        {% for box in boxes %}
+        <article class="box-card">
+            <div class="box-art" {% if box.art %}style="background-image: linear-gradient(180deg, rgba(10,13,36,0.15), rgba(10,13,36,0.92)), url('{{ box.art }}');"{% endif %}>
+                <img class="box-icon" src="{{ box.icon }}" alt="Símbolo do set {{ box.name }}" loading="lazy">
+            </div>
+            <div class="box-body">
+                <div class="box-meta">
+                    <span class="box-code">{{ box.set_code|upper }}</span>
+                    <span class="box-date">{{ box.release_date }}</span>
+                </div>
+                <h3>{{ box.name }}</h3>
+                <p class="box-desc">{{ box.description }}</p>
+                <div class="box-footer">
+                    <span class="box-price">{{ box.price }}</span>
+                    <span class="box-boosters">{{ box.boosters }} boosters</span>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="cards" class="section section-alt">
+    <div class="section-head">
+        <h2>Cartas Avulsas</h2>
+        <p>Clique em uma carta para ver os detalhes e o texto transcrito.</p>
+    </div>
+
+    <div class="card-grid">
+        {% for card in cards %}
+        <a href="{{ url_for('card_detail', card_id=card.id) }}" class="card-thumb rarity-{{ card.rarity|lower|replace('í','i')|replace('á','a') }}">
+            <div class="card-thumb-frame">
+                {% if card.image %}
+                <img src="{{ card.image }}" alt="{{ card.name }}" loading="lazy">
+                {% else %}
+                <div class="img-placeholder"><span>{{ card.name }}</span></div>
+                {% endif %}
+            </div>
+            <div class="card-thumb-info">
+                <span class="card-thumb-name">{{ card.name }}</span>
+                <span class="card-thumb-set">{{ card.set }}</span>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
